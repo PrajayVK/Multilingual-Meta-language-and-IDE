@@ -1,0 +1,1 @@
+Module(body=[Assign(targets=[Name(id='a', ctx=Store())], value=Num(n=3)), Assign(targets=[Name(id='b', ctx=Store())], value=Num(n=4)), Assign(targets=[Name(id='c', ctx=Store())], value=BinOp(left=Name(id='a', ctx=Load()), op=Add(), right=Name(id='b', ctx=Load()))), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Name(id='c', ctx=Load())], keywords=[]))])
