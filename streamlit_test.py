@@ -3,9 +3,9 @@ import subprocess
 import openai
 
 # Set up the app layout
-st.set_page_config(page_title="EDUMIZE", page_icon=":books:")
-st.title("DOSA Multilingual IDE")
-st.header("By Logic Dosa\n")
+st.set_page_config(page_title="IDE", page_icon=":clipboard:")
+st.markdown("<h1 style='text-align: center; font-size: 4em;'>Bit-Fiddler</h1>", unsafe_allow_html=True)
+st.header("Your Multilingual Coding Playground :computer:\n")
 
 # Set up OpenAI API key
 openai.api_key = "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"
@@ -23,7 +23,9 @@ def open_file1(text):
     return file_contents
 
 # Set up app menu
-st.markdown("DOSA - Multilungual IDE for 'Python' & 'Julia' ")
+st.markdown("")
+st.markdown("")
+st.markdown("")
 menu = ["Python IDE", "Julia IDE"]
 choice = st.sidebar.selectbox("Select a tool:", menu)
 
