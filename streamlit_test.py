@@ -31,8 +31,6 @@ choice = st.sidebar.selectbox("Select a tool:", menu)
 
 if choice == "Python IDE":
     st.subheader("Visual Learning")
-    if st.button("Run Visualization"):
-        subprocess.run(["python", "graphviz_ast1.py"])
     if st.button("Give Prompt"):
         st.markdown("---")
         prompt = st.text_area("Enter your prompt here", height=150)
@@ -46,8 +44,13 @@ if choice == "Python IDE":
             )
             generated_text = response.choices[0].text
             st.markdown("---")
+            st.subheader("Generated Prompt:")
+            st.write(generated_text)
             st.subheader("Generated Output:")
             st.code(generated_text, language='python')
+
+            if st.button("Run Visualization"):
+                subprocess.run(["python", "graphviz_main.py"])
 
 if choice == "Julia IDE":
     st.subheader("Not Built yet")
