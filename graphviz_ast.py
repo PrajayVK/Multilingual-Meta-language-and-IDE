@@ -54,4 +54,4 @@ def visit(node):
 visit(tree)
 
 # Render the graph as a PDF file
-dot.render('ast_graph', format='pdf')
+dot.render('ast_graph', format='dot')

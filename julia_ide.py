@@ -1,34 +1,63 @@
 from tkinter import *
-from tkinter.ttk import Style
-
-def toggle_dark_mode():
-    # Get the current theme
-    current_theme = theme_choice.get()
-
-    if current_theme == "clam":
-        # Switch to the dark theme
-        style.theme_use('alt')
-        theme_choice.set('alt')
-    else:
-        # Switch back to the light theme
-        style.theme_use('clam')
-        theme_choice.set('clam')
+from tkinter.filedialog import asksaveasfilename, askopenfilename
+import subprocess
 
 compiler = Tk()
-compiler.title('DOSA - Multilingual IDE')
+compiler.title('DOSA - Multilingual IDE - JULIA')
+file_path = ''
 
-# Set the style to 'clam' for the light theme
-style = Style(compiler)
-style.theme_use('clam')
 
-# Add a menu option to toggle dark mode
-theme_choice = StringVar()
-theme_choice.set('clam')
-dark_mode_menu = Menu(compiler, tearoff=0)
-dark_mode_menu.add_radiobutton(label='Light Mode', variable=theme_choice, value='clam', command=toggle_dark_mode)
-dark_mode_menu.add_radiobutton(label='Dark Mode', variable=theme_choice, value='alt', command=toggle_dark_mode)
+def set_file_path(path):
+    global file_path
+    file_path = path
+
+
+def open_file():
+    path = askopenfilename(filetypes=[('Python Files', '*.jl')])
+    with open(path, 'r') as file:
+        code = file.read()
+        editor.delete('1.0', END)
+        editor.insert('1.0', code)
+        set_file_path(path)
+
+
+def save_as():
+    if file_path == '':
+        path = asksaveasfilename(filetypes=[('Python Files', '*.jl')])
+    else:
+        path = file_path
+    with open(path, 'w') as file:
+        code = editor.get('1.0', END)
+        file.write(code)
+        set_file_path(path)
+
+
+def run():
+    if file_path == '':
+        save_prompt = Toplevel()
+        text = Label(save_prompt, text='Please save your code')
+        text.pack()
+        return
+    command = f'python {file_path}'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    output, error = process.communicate()
+    code_output.insert('1.0', output)
+    code_output.insert('1.0',  error)
+
+
 menu_bar = Menu(compiler)
-menu_bar.add_cascade(label='View', menu=dark_mode_menu)
+
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(label='Open', command=open_file)
+file_menu.add_command(label='Save', command=save_as)
+file_menu.add_command(label='Save As', command=save_as)
+file_menu.add_command(label='Exit', command=exit)
+menu_bar.add_cascade(label='File', menu=file_menu)
+
+run_bar = Menu(menu_bar, tearoff=0)
+run_bar.add_command(label='Run', command=run)
+menu_bar.add_cascade(label='Run', menu=run_bar)
+
 compiler.config(menu=menu_bar)
 
 editor = Text()
@@ -38,6 +67,3 @@ code_output = Text(height=10)
 code_output.pack()
 
 compiler.mainloop()
-
-
-

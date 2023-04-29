@@ -3,7 +3,7 @@ from tkinter.filedialog import asksaveasfilename, askopenfilename
 import subprocess
 
 compiler = Tk()
-compiler.title('DOSA - Multilingual IDE')
+compiler.title('DOSA - Multilingual IDE - PYTHON')
 file_path = ''
 
 
