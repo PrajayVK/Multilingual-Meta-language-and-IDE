@@ -3,9 +3,9 @@ from graphviz import Digraph
 
 # Define the Python code snippet to visualize
 code = """
-a = 3
-b = 4
-c = add(a, b)
+a=3
+b=4
+c=add(a, b)
 print(c)
 """
 
