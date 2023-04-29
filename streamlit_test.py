@@ -8,7 +8,7 @@ st.markdown("<h1 style='text-align: center; font-size: 4em;'>Bit-Fiddler</h1>", 
 st.header("Your Multilingual Coding Playground :computer:\n")
 
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = "ENTER API KEY"
 model = "text-davinci-002"
 
 
